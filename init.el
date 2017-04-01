@@ -37,22 +37,31 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ivy
-     helm
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      :disabled-for org markdown)
      (better-defaults :variables better-defaults-move-to-end-of-code-first t)
      emacs-lisp
      git
      markdown
      org
-     osx
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     spell-checking
+     (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English")
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     ;; spell-checking
      syntax-checking
      ;; version-control
      yaml
-     (go :variables go-tab-width 4)
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-clang-support t)
+     ycmd
+     wanchaol
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -304,6 +313,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; set custom elisp file
   (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
   (load custom-file 'no-error 'no-message)
+
+  ;; ycmd start up
+  (setq ycmd-global-config (file-truename "~/.vim/.ycm_extra_conf.py"))
+  (setq ycmd-server-command (list "python" (file-truename "~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd/")))
+  (setq ycmd-force-semantic-completion t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -318,6 +332,9 @@ you should place your code here."
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   ;; Make copy/paste working with the mouse in X11 terminals
   (xterm-mouse-mode -1)
+  (add-hook 'spacemacs-buffer-mode-hook (lambda ()
+                                          (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+  (global-flycheck-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -336,3 +353,9 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+)

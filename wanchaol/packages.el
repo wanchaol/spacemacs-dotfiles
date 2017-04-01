@@ -30,7 +30,11 @@
 ;;; Code:
 
 (defconst wanchaol-packages
-  '()
+  '(
+    flycheck
+    protobuf-mode
+    ;; google-c-style
+    )
   "The list of Lisp packages required by the wanchaol layer.
 
 Each entry is either:
@@ -58,5 +62,32 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+(defun wanchaol/init-protobuf-mode ()
+  (use-package protobuf-mode
+    :init (progn
+            (defun spacemacs//setup-protobuf-imenu ()
+              "Setup imenu regex for protocol buffers."
+              (setq imenu-generic-expression '((nil "^[[:space:]]*\\(message\\|service\\|enum\\)[[:space:]]+\\([[:alnum:]]+\\)"
+                                                    2))))
+            (add-hook 'protobuf-mode-hook 'spacemacs//setup-protobuf-imenu))))
 
+(defun wanchaol/post-init-flycheck ()
+  (spacemacs/add-flycheck-hook '(protobuf-mode c-mode c++-mode))
+  )
+
+;;define my init hook
+;; (defun wanchaol/post-init-google-c-style ()
+;;   (use-package google-c-style
+;;     :init (add-hook 'c-mode-common-hook 'google-set-c-style)))
+
+;; (defun my-c-mode-common-hook ()
+;;   (setq flycheck-clang-include-path (list (expand-file-name "../include/") (projectile-expand-root "/include"))))
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; Bind clang-format-region to C-M-tab in all modes:
+(global-set-key [C-M-tab] 'clang-format-region)
+;; Bind clang-format-buffer to tab on the c++-mode only:
+(add-hook 'c++-mode-hook 'clang-format-bindings)
+(defun clang-format-bindings ()
+  (define-key c++-mode-map [tab] 'clang-format-buffer))
 ;;; packages.el ends here
