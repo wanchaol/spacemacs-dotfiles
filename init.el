@@ -52,11 +52,15 @@ values."
      (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English")
      (shell :variables
             shell-default-height 30
-            shell-default-position 'bottom)
+            shell-default-position 'bottom
+            shell-default-shell 'term
+            shell-default-term-shell "/bin/zsh")
      ;; spell-checking
      syntax-checking
      ;; version-control
      yaml
+     python
+     shell-scripts
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
