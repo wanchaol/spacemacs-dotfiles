@@ -36,7 +36,8 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
+     ;; ivy
+     helm
      (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-tab-key-behavior 'cycle
@@ -64,7 +65,10 @@ values."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
+     semantic
      ycmd
+     ;; cscope
+     gtags
      wanchaol
      )
    ;; List of additional packages that will be installed without being

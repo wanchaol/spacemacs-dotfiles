@@ -74,20 +74,9 @@ Each entry is either:
 (defun wanchaol/post-init-flycheck ()
   (spacemacs/add-flycheck-hook '(protobuf-mode c-mode c++-mode))
   )
-
 ;;define my init hook
 ;; (defun wanchaol/post-init-google-c-style ()
 ;;   (use-package google-c-style
 ;;     :init (add-hook 'c-mode-common-hook 'google-set-c-style)))
 
-;; (defun my-c-mode-common-hook ()
-;;   (setq flycheck-clang-include-path (list (expand-file-name "../include/") (projectile-expand-root "/include"))))
-;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-
-;; Bind clang-format-region to C-M-tab in all modes:
-(global-set-key [C-M-tab] 'clang-format-region)
-;; Bind clang-format-buffer to tab on the c++-mode only:
-(add-hook 'c++-mode-hook 'clang-format-bindings)
-(defun clang-format-bindings ()
-  (define-key c++-mode-map [tab] 'clang-format-buffer))
 ;;; packages.el ends here
