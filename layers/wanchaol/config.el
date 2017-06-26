@@ -7,6 +7,9 @@
               (sequence "WAITING(w)" "HOLD(h)" "|" "CANCELLED(c)" "PHONE" "MEETING"))))
 
 ;; org mode agenda view config
+(setq org-agenda-files
+      (list "~/Dropbox/Apps/MobileOrg/gtd.org"))
+
 (setq org-agenda-custom-commands
       '(
         ("n" todo "NEXT")
@@ -25,7 +28,7 @@
          "* TODO %? \n:PROPERTIES:\n:CREATED: %U\n:END:")
         ;; Create Todo under GTD.org -> Private -> Tasks
         ;; file+olp specifies to full path to fill the Template
-        ("p" "Private TODO" entry (file+olp "~/Dropbox/Apps/MobileOrg/gtd_archive.org" "Private" "Tasks")
+        ("p" "Private TODO" entry (file+olp "~/Dropbox/Apps/MobileOrg/gtd.org" "Private" "Tasks")
          "* TODO %? \n:PROPERTIES:\n:CREATED: %U\n:END:")
         ))
 
